@@ -131,4 +131,16 @@ describe('Category', () => {
 
     expect(category.created_at).toBe(created_at);
   });
+
+  it('should update name and description', () => {
+    const category = new Category({
+      name: 'Movie',
+      description: 'Movie description',
+    });
+    category.update('Movie 2', 'Movie 2 description');
+    expect(category.props).toMatchObject({
+      name: 'Movie 2',
+      description: 'Movie 2 description',
+    });
+  });
 });
