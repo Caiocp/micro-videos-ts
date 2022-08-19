@@ -1,17 +1,9 @@
-# Montagem do ambiente de desenvolvimento (Docker e IDE)
+# Codeflix
 
-# Criar uma aplicação Node.js
+### Admin do catálogo de vídeos
 
-# Criar entidade de categoria
+Projeto feito no curso Fullcycle utilizando conceitos de clean architecture e ddd
 
-# Criar testes
+### :wrench: tecnologias
 
-# Criar casos de uso e repositório
-
-# Criar testes
-
-# Repetir para as outras entidades (Genre, Cast, Video)
-
-# Nestjs - criação da API rest
-# Integração com RabbitMQ e encoder de vídeo
-# Testes E2E
+:construction: em breve :construction:
