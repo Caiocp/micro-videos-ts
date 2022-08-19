@@ -147,12 +147,20 @@ describe('Category', () => {
     });
   });
 
-  it('should activate and deactivate category', () => {
+  it('should activate a category', () => {
     const category = new Category({
       name: 'Movie',
+      is_active: false,
     });
     category.activate();
     expect(category.is_active).toBeTruthy();
+  });
+
+  it('should deactivate a category', () => {
+    const category = new Category({
+      name: 'Movie',
+      is_active: true,
+    });
 
     category.deactivate();
     expect(category.is_active).toBeFalsy();
