@@ -68,8 +68,8 @@ describe('Category', () => {
 
     data.forEach((item) => {
       let category = new Category(item.props, item.id);
-      expect(category.id).toBeDefined();
-      expect(category.id).toBeInstanceOf(UniqueEntityId);
+      expect(category.id).not.toBeNull();
+      expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
     });
   });
 
