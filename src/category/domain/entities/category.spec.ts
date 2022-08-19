@@ -73,9 +73,12 @@ describe('Category', () => {
     });
   });
 
-  test('Getter of name field', () => {
+  test('Getter and setter of name field', () => {
     const category = new Category({ name: 'Movie' });
     expect(category.name).toBe('Movie');
+
+    category['name'] = 'some name';
+    expect(category.name).toBe('some name');
   });
 
   test('Getter and setter of description prop', () => {
