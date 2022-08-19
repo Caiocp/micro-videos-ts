@@ -143,4 +143,15 @@ describe('Category', () => {
       description: 'Movie 2 description',
     });
   });
+
+  it('should activate and deactivate category', () => {
+    const category = new Category({
+      name: 'Movie',
+    });
+    category.activate();
+    expect(category.is_active).toBeTruthy();
+
+    category.deactivate();
+    expect(category.is_active).toBeFalsy();
+  });
 });
