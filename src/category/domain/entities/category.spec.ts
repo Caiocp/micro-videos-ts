@@ -1,5 +1,4 @@
 import { omit } from 'lodash';
-import { validate } from 'uuid';
 import UniqueEntityId from '../../../shared/domain/value-objects/unique-entity-id.vo';
 
 import { Category, CategoryProperties } from './category';

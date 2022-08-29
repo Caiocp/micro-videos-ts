@@ -6,7 +6,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import { ClassFieldsValidator } from '../../../shared/validators/class-fields-validator';
+import { ClassFieldsValidator } from '../../../shared/domain/validators/class-fields-validator';
 import { CategoryProperties } from '../entities/category';
 
 export class CategoryRules {
@@ -39,7 +39,7 @@ export class CategoryRules {
 
 export class CategoryValidator extends ClassFieldsValidator<CategoryRules> {
   validate(data: CategoryProperties): boolean {
-    return super.validate(new CategoryRules(data));
+    return super.validate(new CategoryRules(data ?? ({} as any)));
   }
 }
 
