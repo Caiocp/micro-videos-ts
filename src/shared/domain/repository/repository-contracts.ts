@@ -87,7 +87,7 @@ export class SearchParams {
     this._order = dir !== 'asc' && dir !== 'desc' ? 'asc' : dir;
   }
 
-  get filter() {
+  get filter(): string | null {
     return this._filter;
   }
 
@@ -102,7 +102,7 @@ export class SearchParams {
 type SearchResultProps<E extends Entity, Filter> = {
   items: E[];
   total: number;
-  current_page: number;
+  page: number;
   per_page: number;
   sort: string | null;
   order: string | null;
@@ -112,7 +112,7 @@ type SearchResultProps<E extends Entity, Filter> = {
 export class SearchResult<E extends Entity, Filter = string> {
   readonly items: E[];
   readonly total: number;
-  readonly current_page: number;
+  readonly page: number;
   readonly per_page: number;
   readonly last_page: number;
   readonly sort: string | null;
@@ -122,7 +122,7 @@ export class SearchResult<E extends Entity, Filter = string> {
   constructor(props: SearchResultProps<E, Filter>) {
     this.items = props.items;
     this.total = props.total;
-    this.current_page = props.current_page;
+    this.page = props.page;
     this.per_page = props.per_page;
     this.last_page = Math.ceil(props.total / props.per_page);
     this.sort = props.sort;
@@ -134,7 +134,7 @@ export class SearchResult<E extends Entity, Filter = string> {
     return {
       items: this.items,
       total: this.total,
-      current_page: this.current_page,
+      page: this.page,
       per_page: this.per_page,
       last_page: this.last_page,
       sort: this.sort,
@@ -157,5 +157,6 @@ export interface SearchableRepositoryInterface<
   P = SearchParams,
   R = SearchResult<E, Filter>
 > extends RepositoryInterface<E> {
+  sortableFields: string[];
   search(props: P): Promise<R>;
 }

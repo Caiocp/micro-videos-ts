@@ -137,7 +137,7 @@ describe('Search unit tests', () => {
           data: {
             items: ['entity1', 'entity2'] as any,
             total: 4,
-            current_page: 1,
+            page: 1,
             per_page: 2,
             sort: null,
             order: null,
@@ -146,7 +146,7 @@ describe('Search unit tests', () => {
           expected: {
             items: ['entity1', 'entity2'] as any,
             total: 4,
-            current_page: 1,
+            page: 1,
             per_page: 2,
             last_page: 2,
             sort: null,
@@ -158,7 +158,7 @@ describe('Search unit tests', () => {
           data: {
             items: ['entity1', 'entity2'] as any,
             total: 4,
-            current_page: 1,
+            page: 1,
             per_page: 2,
             sort: 'name',
             order: 'asc',
@@ -167,7 +167,7 @@ describe('Search unit tests', () => {
           expected: {
             items: ['entity1', 'entity2'] as any,
             total: 4,
-            current_page: 1,
+            page: 1,
             per_page: 2,
             last_page: 2,
             sort: 'name',
@@ -188,7 +188,7 @@ describe('Search unit tests', () => {
       const result = new SearchResult({
         items: [] as any,
         total: 4,
-        current_page: 1,
+        page: 1,
         per_page: 20,
         sort: null,
         order: null,
@@ -202,7 +202,7 @@ describe('Search unit tests', () => {
       const result = new SearchResult({
         items: [] as any,
         total: 101,
-        current_page: 1,
+        page: 1,
         per_page: 20,
         sort: null,
         order: null,
