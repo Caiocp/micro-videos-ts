@@ -1,7 +1,13 @@
 import { Entity } from '../entity/entity';
 import { NotFoundError } from '../errors/not-found.error';
 import UniqueEntityId from '../value-objects/unique-entity-id.vo';
-import { RepositoryInterface } from './repository-contracts';
+import {
+  RepositoryInterface,
+  SearchableRepositoryInterface,
+  SearchParams,
+  SearchResult,
+  SortOrder,
+} from './repository-contracts';
 
 export class InMemoryRepository<E extends Entity>
   implements RepositoryInterface<E>
@@ -40,5 +46,72 @@ export class InMemoryRepository<E extends Entity>
     if (!result) throw new NotFoundError(`Entity not found using id ${id}`);
 
     return result;
+  }
+}
+
+export abstract class InMemorySearchableRepository<E extends Entity>
+  extends InMemoryRepository<E>
+  implements SearchableRepositoryInterface<E>
+{
+  sortableFields: string[] = [];
+
+  async search(props: SearchParams): Promise<SearchResult<E>> {
+    const filteredItems = await this.applyFilter(this.items, props.filter);
+    const sortedItems = await this.applySort(
+      filteredItems,
+      props.sort,
+      props.order
+    );
+    const paginatedItems = await this.applyPagination(
+      sortedItems,
+      props.page,
+      props.per_page
+    );
+
+    return new SearchResult({
+      items: paginatedItems,
+      total: filteredItems.length,
+      page: props.page,
+      per_page: props.per_page,
+      sort: props.sort,
+      order: props.order,
+      filter: props.filter,
+    });
+  }
+
+  protected abstract applyFilter(
+    items: E[],
+    filter: string | null
+  ): Promise<E[]>;
+
+  protected async applySort(
+    items: E[],
+    sort: string | null,
+    order: SortOrder | null
+  ): Promise<E[]> {
+    if (!sort || !this.sortableFields.includes(sort)) return items;
+
+    return [...items].sort((a, b) => {
+      if (a.props[sort] < b.props[sort]) {
+        return order === 'asc' ? -1 : 1;
+      }
+
+      if (a.props[sort] > b.props[sort]) {
+        return order === 'asc' ? 1 : -1;
+      }
+
+      return 0;
+    });
+  }
+
+  protected async applyPagination(
+    items: E[],
+    page: SearchParams['page'],
+    per_page: SearchParams['per_page']
+  ): Promise<E[]> {
+    const start = (page - 1) * per_page;
+    const limit = start + per_page;
+
+    return items.slice(start, limit);
   }
 }
