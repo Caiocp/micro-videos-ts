@@ -34,10 +34,20 @@ describe('Category in memory repository unit tests', () => {
   });
 
   it('should return all categories ordered by created_at when sort is null', async () => {
+    const created_at = new Date();
     const categories = [
-      new Category({ name: 'test' }),
-      new Category({ name: 'TEST' }),
-      new Category({ name: 'category' }),
+      new Category({
+        name: 'test',
+        created_at: new Date(created_at.getTime() + 200),
+      }),
+      new Category({
+        name: 'TEST',
+        created_at: new Date(created_at.getTime() + 100),
+      }),
+      new Category({
+        name: 'category',
+        created_at,
+      }),
     ];
 
     const result = await repository['applySort'](categories, null, null);
