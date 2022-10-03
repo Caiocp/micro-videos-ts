@@ -1,6 +1,6 @@
 import { CategoryRepository } from '../../domain/repository/category.repository';
 import { Category } from '../../domain/entities/category';
-import { CategotyOutput } from '../dto/output.dto';
+import { CategoryOutputMapper, CategotyOutput } from '../dto/category-output';
 import { UseCase } from '../../../shared/application/use-case';
 
 export type Input = {
@@ -18,12 +18,10 @@ export class CreateCategoryUseCase implements UseCase<Input, Output> {
     const entity = new Category(input);
     await this.categoryRepo.insert(entity);
 
-    return {
-      id: entity.id,
-      name: entity.name,
-      description: entity.description,
-      is_active: entity.is_active,
-      created_at: entity.created_at,
-    };
+    return this.toOutput(entity);
+  }
+
+  toOutput(entity: Category): Output {
+    return CategoryOutputMapper.toOutput(entity);
   }
 }
