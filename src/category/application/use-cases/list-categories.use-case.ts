@@ -11,7 +11,7 @@ export type Input = SearchInputDto;
 
 export type Output = PaginationOutputDto<CategotyOutput>;
 
-export class ListCategoryUseCase implements UseCase<Input, Output> {
+export class ListCategoriesUseCase implements UseCase<Input, Output> {
   constructor(private readonly categoryRepo: CategoryRepository.Repository) {}
 
   async execute(input: Input): Promise<Output> {
