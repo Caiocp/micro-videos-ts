@@ -1,6 +1,4 @@
 import { SearchResult } from '../../domain/repository/repository-contracts';
-import { Category } from '../../domain/entities/category';
-import { CategoryOutputMapper } from './category-output';
 import { PaginateOutputMapper } from './pagination-output';
 
 describe('PaginateOutputMapper unit tests', () => {
