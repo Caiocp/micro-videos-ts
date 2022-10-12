@@ -6,7 +6,8 @@
     },
     "baseUrl": "./src",
     "paths": {
-      "@shared/*": ["./shared/*"]
+      "#shared/*": ["./shared/*"],
+      "#category/*": ["./category/*"]
     }
   }
 }

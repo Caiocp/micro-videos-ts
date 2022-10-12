@@ -1,5 +1,5 @@
 import { omit } from 'lodash';
-import UniqueEntityId from '@shared/domain/value-objects/unique-entity-id.vo';
+import UniqueEntityId from '#shared/domain/value-objects/unique-entity-id.vo';
 
 import { Category, CategoryProperties } from './category';
 
