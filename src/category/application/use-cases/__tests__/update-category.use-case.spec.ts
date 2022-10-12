@@ -36,7 +36,22 @@ describe('UpdateCategoryUseCase unit tests', () => {
     });
     expect(updateSpy).toHaveBeenCalledTimes(1);
 
-    const arrange = [
+    type Arrange = {
+      input: {
+        id: string;
+        name: string;
+        description?: string;
+        is_active?: boolean;
+      };
+      expected: {
+        id: string;
+        name: string;
+        description?: string | null;
+        is_active: boolean;
+        created_at: Date;
+      };
+    };
+    const arrange: Arrange[] = [
       {
         input: {
           id: entity.id,
@@ -59,7 +74,7 @@ describe('UpdateCategoryUseCase unit tests', () => {
         expected: {
           id: entity.id,
           name: 'test',
-          description: null as any,
+          description: null,
           is_active: true,
           created_at: entity.created_at,
         },
@@ -73,7 +88,7 @@ describe('UpdateCategoryUseCase unit tests', () => {
         expected: {
           id: entity.id,
           name: 'test',
-          description: null as any,
+          description: null,
           is_active: false,
           created_at: entity.created_at,
         },

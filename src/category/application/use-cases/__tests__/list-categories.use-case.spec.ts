@@ -68,8 +68,9 @@ describe('ListCategoriesUseCase unit tests', () => {
     repository.items = items;
 
     const output = await useCase.execute({});
+    const reverseItems = [...items].reverse();
     expect(output).toStrictEqual({
-      items: [...items.reverse().map((item) => item.toJSON())],
+      items: [reverseItems.map((item) => item.toJSON())],
       total: 2,
       current_page: 1,
       per_page: 15,
